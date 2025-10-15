@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-animate.js"></script>
+</head>
+<body ng-app="myapp">
+    <style>
+        .fade.ng-hide-add,
+        .fade.ng-hide-remove{
+            transition: 0.5ms;
+            display: block;
+        }
+        .fade.ng-hide{
+            opacity: 0;
+        }
+        .fade{
+            opacity: 1;
+        }
+    </style>
+    <div ng-controller="myctrl">
+
+        <button ng-click="show = !show">toggle</button>
+        <span class="fade" ng-show="show">hello</span>
+    </div>
+</body>
+<script>
+    const app=angular.module("myapp",['ngAnimate']);
+    app.controller("myctrl",function($scope){
+        $scope.msg=true;
+    })
+</script>
+</html>

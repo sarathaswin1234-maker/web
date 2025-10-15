@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        .error{
+            color: red;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+<body ng-app="myapp">
+    <div ng-controller="myctrl">
+        <form name="user" ng-submit="submitForm(user.$valid)" novalidate>
+            <label for="">Username:</label>
+            <input type="text" name="username" ng-pattern="/^[a-zA-z]{3,8}$/" ng-model="myform.username" required ng-model="user.username">
+            <div class="error" ng-show="user.username.$touched && user.username.$invalid">
+                <span ng-show="user.username.$error.required">Username required</span>
+                <span ng-show="user.username.$error.pattern">Username  must be 3 to 8</span>
+            </div>
+            <br>
+            <label for="">Email:</label>
+            <input type="email" name="email" required>
+            <div class="error" ng-show="user.email.$touched && user.email.$invalid">
+                <span ng-show="user.email.$error.required">Email required</span>
+            </div>
+            <br>
+            <label for="">Password:</label>
+            <input type="text" name="password" ng-model="myform.pass" ng-pattern="/^(?=.*[A-Z])(?=.*\d)(?=.*[@!#$%*]).{8,}$/" required>
+            <div class="error" ng-show="user.password.$touched && user.password.$invalid">
+                <span ng-show="user.password.$error.pattern">Password constraints not satisfied</span>
+
+            </div>
+            <br>
+            <label for="">Confirm Password:</label>
+            <input type="text" name="cpassword" ng-model="myform.cpass" required>
+            <div class="error">
+                <span ng-show="!passwordMatch()">Password not matches</span>
+                
+            </div>
+            <br>
+            <button type="submit">submit</button>
+
+        </form>
+
+    </div>
+</body>
+    <script>
+        const myapp=angular.module("myapp",[])
+        myapp.controller("myctrl",function($scope){
+            $scope.myform={};
+            $scope.passwordMatch=function(){
+                return $scope.user.pass===$scope.user.cpass;
+            }
+            $scope.submitForm=function(isvalid){
+                if(isvalid===true){
+                    alert("form submiitted")
+                }else{
+                    alert("not valid form")
+                }
+            }
+        })
+    </script>
+</html>

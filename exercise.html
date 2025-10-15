@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple to do list</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body ng-app="myapp">
+    <div ng-controller="myctrl">
+        <h2>Simple To-Do List</h2>
+        <br>
+        <label for="">Enter Task:</label>
+        <input type="text" ng-model="task">
+        <br>
+        <button ng-click="addTask(task)">Submit</button>
+
+        <div ng-show="tasks.length>0">
+            <h3>Task To Do</h3>
+            <ul ng-repeat="i in tasks">
+                <li>{{i}} -- <button ng-click="deleteTask(i)">Delete</button>--<button ng-click="updateTask()">Update</button></li>
+                <div ng-show="tog>0">
+                    <input type="text" ng-model="uptask">
+                    <button ng-click="update(i,uptask)">updateTask</button>
+                </div>
+            </ul>
+        </div>
+        <mydirect username="user.name"></mydirect>
+        <button ng-click="factor()">factory</button>
+    </div>
+</body>
+</html>

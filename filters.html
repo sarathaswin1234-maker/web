@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="filterApp">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="MainCtrl">
+
+  <h3>Built-in Filters Example</h3>
+
+  <p>Uppercase: {{ name | uppercase }}</p>
+  <p>Lowercase: {{ name | lowercase }}</p>
+  <p>Currency: {{ salary | currency:'₹' }}</p>
+  <p>Date: {{ today | date:'dd-MM-yyyy' }}</p>
+  <p>First 5 chars: {{ name | limitTo:5 }}</p>
+  <p>custom:{{name | myfilter:'a'}}</p>
+
+  <h4>Filter + orderBy in ng-repeat</h4>
+  <input ng-model="searchText" placeholder="Search name...">
+
+  <ul>
+    <li ng-repeat="student in students | filter:searchText | orderBy:'name'">
+      {{ student.name }} - {{ student.marks | number:1 }}
+    </li>
+  </ul>
+
+  <script>
+  angular.module('filterApp', [])
+  .controller('MainCtrl', function($scope){
+    $scope.name = "Sudharshan";
+    $scope.salary = 12000;
+    $scope.today = new Date();
+    $scope.students = [
+      {name:'Asha', marks:89.2},
+      {name:'Bala', marks:77.5},
+      {name:'Charan', marks:91.8}
+    ];
+  }).filter('myfilter',function(){
+    return function(n,ch){
+        
+        return n.indexOf(ch);
+    }
+  })
+  </script>
+
+</body>
+</html>
