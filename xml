@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="books.xsl"?>
+<catalogue>
+    <book>
+        <name>Lotr</name>
+        <genre>High fantasy</genre>
+    </book>
+    <book>
+        <name>Harry Potter</name>
+        <genre>Magic</genre>
+    </book>
+    <book>
+        <name>Silmarillion</name>
+        <genre>High fantasy</genre>
+    </book>
+</catalogue>
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:template match="catalogue">
+        <html>
+            <head>
+                <title>Books XML</title>
+                <style>
+                    table { border-collapse: collapse; }
+                    th, td { border: 1px solid black; padding: 5px; }
+                </style>
+            </head>
+            <body>
+                <h1>Books:</h1>
+                <table>
+                    <tr>
+                        <th>Title</th>
+                        <th>Genre</th>
+                    </tr>
+                    <xsl:apply-templates select="book"/>
+                </table>
+            </body>
+        </html>
+    </xsl:template>
+
+    <xsl:template match="book">
+        <tr>
+            <td><xsl:value-of select="name"/></td>
+            <td><xsl:value-of select="genre"/></td>
+        </tr>
+    </xsl:template>
+</xsl:stylesheet>
